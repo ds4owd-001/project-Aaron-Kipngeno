@@ -1,0 +1,26 @@
+Variable_name,Description
+Gender,the gender of the respondent
+Age_bracket,Age of the respondent
+Education,Highest level of eduction of the respondent
+Religion,What is your religion
+Household_size,number of people living in this household
+Know_sanitation,Do you know what sanitation is
+source_of_information,Where do you mainly get information on sanitation?
+User_technology,What is the type of latrine owned by the respondent?
+Technology_shared,Is sanitation faclilty shared?
+Households_sharing,"If yes, by how many household?"
+Motivating_factors,What motivated you to construct the latrine you have
+Benefit_of_use_latrine,Do you think it is beneficial for people to use latrines
+Impacts _of_open_defecation,What are the consequences of not using latrine
+Quality_of_toilet,What characteristics would you like to see in your latrine of choice?
+Sanitation_laws,Are you aware of any laws in your county that encourage households to have sanitation facilities?
+Culture,What cultures do exist in your community that affect owning and use of latrines
+Sanitation_organizations,Are there people or organizations in your area who sell/market sanitation/toilets
+Employement_status,What is your current employment status
+Income,What is the range of your household income per month?
+Cost_of_latrine,How much did the latrine you have cost you?
+Willingness_to_invest,Are you willing to invest in sanitation?
+level_of _willingness,Would you be willing to use your money and other resources to invest in a sanitation facility/latrine?
+Ability_to_invest,Are you able to invest in sanitation?
+Amount_to_invest,How much would you invest in a latrine of your choice?
+Sanitation_loan,Would you be willing to take a loan to construct a latrine for your household?
