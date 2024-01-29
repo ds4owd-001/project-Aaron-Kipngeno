@@ -10,7 +10,7 @@ execute:
 editor: visual
 ---
 
-```{r}
+```{r echo=FALSE}
 #| label: load-packages
 library(readr)
 library(tidyverse)
