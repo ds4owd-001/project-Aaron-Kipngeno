@@ -222,7 +222,7 @@ bargrap1 <- ggplot(data = sanitation_clean,
 
 ```
 
-saving data file
+#saving data file
 
 ```{r}
 write_csv(x = sanitation_clean, "/cloud/project/data/processed/sanitation_clean.csv")
@@ -232,6 +232,10 @@ write_csv(x = sanitation_clean, "/cloud/project/data/processed/sanitation_clean.
 ```{r}
 library(gtsummary)
 library(ggplot2)
+library(gt)
+library(ggplot2)
+library(tidyverse)
+library(dplyr)
 
 ```
 
@@ -254,37 +258,74 @@ table1 <- sanitation_clean |>
 ```
 
 
-#bar graphs showing distribution of respondents by age, brackets
+#data visualization showing distribution of demographic characteristics of respondents 
 ```{r}
+#pie chart for gender distributions 
+#Create a data frame with the gender distribution
+gender_data <- data.frame(
+  gender = c("Male", "Female", "Prefer not to say"),
+  count = c(49, 48,2))
+
+ggplot(gender_data, aes(x = "", y = count, fill = gender)) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar("y") +
+  labs(title = "Figure 1. Distribution of respondents by gender", fill = "gender") +
+  theme_minimal()
+
+
  # bar graph showing age_bracket of respondents against frequency "count"
 ggplot(sanitation_clean, aes(x = age_bracket, fill = age_bracket)) +
   geom_bar(stat = "count") +
-  labs(title = "Frequency of Respondents by Age Bracket", x = "Age Bracket", y = "Count")
+  labs(title = " Table 1 : Frequency of Respondents by Age Bracket", x = "Age Bracket", y = "Count")
 
 ggplot(sanitation_clean,
        aes(x = religion, fill = religion))+
   geom_bar(stat = "count")+
-  labs(title = "Frequency of Respondents by religion", x = "religion", y = "Count")
+  labs(title = " Table 2: Frequency of Respondents by religion", x = "religion", y = "Count")
 
 ggplot(sanitation_clean, aes(x = household_size)) +
   geom_bar(stat = "count", colour = "orange") +
-  labs(title = "Household Size Distribution",
+  labs(title = " Table 3; Household Size Distribution",
        x = "Household Size",
        y = "Count")
 ```
-# willlinges to invest in sanitation
+
+#willingess to invest in sanitation
+
 ```{r}
-sanitation_clean |>
-  tbl_summary(include = c(willingness_to_invest)) 
-  
-sanitation_clean |>
-  tbl_summary(include = c(level_of_willingness))
+library(gtsummary)
+sanitation_clean |> 
+  tbl_summary(include = c(willingness_to_invest))
+
 
 sanitation_clean |>
   tbl_cross(row = level_of_willingness,
             col = willingness_to_invest,
-            percent = "cell") |>
-  add_p() # update the column header
+            percent = "cell") |> 
+  add_p()
+ # update the column header
+
+
 
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
