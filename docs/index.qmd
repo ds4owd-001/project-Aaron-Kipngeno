@@ -229,45 +229,62 @@ write_csv(x = sanitation_clean, "/cloud/project/data/processed/sanitation_clean.
 ```
 
 ## Data analysis
+```{r}
+library(gtsummary)
+library(ggplot2)
 
-import processed data for analyis
+```
+
+
+Data import
 
 ```{r}
-library(readr)
-library(here)
+#importing processed data
+
 sanitation_clean <- read_csv(here::here("/cloud/project/data/processed/sanitation_clean.csv"))
 ```
 
-Demographic information of the respondents
-
-```{r}
-library(gtsummary)
-library(ggpubr)
-library(tidyverse)
-library(flextable)
-
-```
 
 ### demographic information of the respondents
 
 ```{r}
-sanitation_clean |>
-  tbl_summary(
-    include = c(gender,age_bracket,religion,education,household_size),
-    missing = "no" # don't list missing data separately
-  ) |>
-  add_n() |> # add column with total number of non-missing observations
-  # test for a difference between groups
-  modify_header(label = "**Variable**") # update the column header
-
+table1 <- sanitation_clean |> 
+  tbl_summary(include = c(gender,age_bracket,religion,education,household_size)) |>
+   modify_header(label = "**Variable**")
 ```
 
+
+#bar graphs showing distribution of respondents by age, brackets
+```{r}
+ # bar graph showing age_bracket of respondents against frequency "count"
+ggplot(sanitation_clean, aes(x = age_bracket, fill = age_bracket)) +
+  geom_bar(stat = "count") +
+  labs(title = "Frequency of Respondents by Age Bracket", x = "Age Bracket", y = "Count")
+
+ggplot(sanitation_clean,
+       aes(x = religion, fill = religion))+
+  geom_bar(stat = "count")+
+  labs(title = "Frequency of Respondents by religion", x = "religion", y = "Count")
+
+ggplot(sanitation_clean, aes(x = household_size)) +
+  geom_bar(stat = "count", colour = "orange") +
+  labs(title = "Household Size Distribution",
+       x = "Household Size",
+       y = "Count")
+```
+# willlinges to invest in sanitation
 ```{r}
 sanitation_clean |>
-  tbl_cross(row = employment_status,
+  tbl_summary(include = c(willingness_to_invest)) 
+  
+sanitation_clean |>
+  tbl_summary(include = c(level_of_willingness))
+
+sanitation_clean |>
+  tbl_cross(row = level_of_willingness,
             col = willingness_to_invest,
             percent = "cell") |>
-  add_p() |> # update the column header
-  modify_header(label = "**Variable**") |>
-  bold_labels()
+  add_p() # update the column header
+
 ```
+
