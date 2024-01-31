@@ -206,4 +206,4 @@ ggplot(data = sanitation_clean,
 write_csv(x = sanitation_clean, "/cloud/project/data/processed/sanitation_clean.csv")
 ```
 
-# Data analyisis 
+# Data analyisis
