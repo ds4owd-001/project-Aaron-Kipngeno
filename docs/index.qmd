@@ -1,16 +1,18 @@
 ---
 title: "willingness to invest in sanitation facilities"
-author: "Aaron Kipngeno"
 date: today
+author: "Aaron Kipngeno"
 format:
   html:
+    embed-resources: true
     toc: true
 execute:
   warning: false
-editor: visual
+editor_options: 
+  chunk_output_type: console
 ---
 
-```{r echo=FALSE}
+```{r}
 #| label: load-packages
 library(readr)
 library(tidyverse)
@@ -28,21 +30,29 @@ objectives of the study
 
 #3. To determine the economic and financial factors that influences the willingness to invest in sanitation facilities by householdsin Bomet Sub-county.
 
-# Data Import
+## Data Import
 
 ```{r}
-sanitation <- read_csv(here::here("data/raw/Sanitation_investiment.csv")) |>
-  mutate(id = row_number()) |>
-  relocate(id) |> 
-  janitor::clean_names()
+sanitation <- read_csv(here::here("data/raw/Sanitation_investiment.csv"))
 
   
+```
+
+### Explore data
+
+```{r}
+head(sanitation)
+tail(sanitation)
+glimpse(sanitation)
+str(sanitation)
+nrow(sanitation)
+ncol(sanitation)
 ```
 
 ## data cleaning
 
 ```{r}
-#renaming of data frame 
+#data transformations - rename/relocate/muatate/removing 
 sanitation_clean <- sanitation |>
 mutate(id = row_number()) |>
   relocate(id) |> 
@@ -129,7 +139,8 @@ sanitation_information <- sanitation_clean |>
 sanitation_information|> 
   filter(answer == 1) |> 
   group_by(information) |> 
-  count()
+  count() |>
+  mutate(percent = n / nrow(sanitation) * 100)
 
 
 
@@ -143,7 +154,9 @@ motivation <- sanitation_clean |>
 motivation|> 
   filter(answer == 1) |> 
   group_by(consequences) |> 
-  count()
+  count() |>
+  mutate(percent = n / nrow(sanitation) * 100)
+
 
 #3 What characteristics would you like to see in your latrine of choice? (mark all that apply)
 
@@ -155,9 +168,10 @@ latrine_charcteristics <- sanitation_clean |>
 latrine_charcteristics |> 
   filter(answer == 1) |> 
   group_by(quality_of_toilet) |> 
-  count()
+  count() |> 
+  mutate(percent = n / nrow(sanitation) * 100)
 
-#4What cultures do exist in your community that affect owning and use of latrines? (mark all that apply)
+#4 What cultures do exist in your community that affect owning and use of latrines? (mark all that apply)
 
 culture <- sanitation_clean |>
   select( in_laws_do_not_share :people_living_with_chronic_illnesses_do_not_share) |> 
@@ -167,7 +181,8 @@ culture <- sanitation_clean |>
 culture |> 
   filter(answer == 1) |> 
   group_by(existing_cultures) |> 
-  count()
+  count() |> 
+  mutate(percent = n / nrow(sanitation) * 100)
 
 #5 What hinders you/people from your community from accessing financial services?(mark all that apply)
 
@@ -179,31 +194,80 @@ loan_factors <- sanitation_clean |>
 loan_factors |> 
   filter(answer == 1) |> 
   group_by(`barrier_to _loan_services`) |> 
-  count()
+  count() |> 
+  mutate(percent = n / nrow(sanitation) * 100)
 ```
 
-data explore
-
 ```{r}
+#filter function
 type_of_latrine <- sanitation_clean |>
   filter(!is.na(type_latrine_own)) |>
   group_by(type_latrine_own) |>
   count()
 
-latrine_access_if_dodnt_own <- sanitation_clean |> 
-  filter(!is.na(if_no)) |> 
-  group_by(if_no) |>
-  count()
-  
 
-ggplot(data = sanitation_clean, 
+```
+
+### Data visualization
+
+```{r}
+library(ggplot2)
+
+# create bar graph, showing age bracket against willingess to invest in sanitation facilities(facetgrid).
+
+bargrap1 <- ggplot(data = sanitation_clean, 
        aes(x = age_bracket, fill = age_bracket))+
   geom_bar(stat = "count")+
   facet_grid(~willingness_to_invest)
+
 ```
+
+saving data file
 
 ```{r}
 write_csv(x = sanitation_clean, "/cloud/project/data/processed/sanitation_clean.csv")
 ```
 
-# Data analyisis
+## Data analysis
+
+import processed data for analyis
+
+```{r}
+library(readr)
+library(here)
+sanitation_clean <- read_csv(here::here("/cloud/project/data/processed/sanitation_clean.csv"))
+```
+
+Demographic information of the respondents
+
+```{r}
+library(gtsummary)
+library(ggpubr)
+library(tidyverse)
+library(flextable)
+
+```
+
+### demographic information of the respondents
+
+```{r}
+sanitation_clean |>
+  tbl_summary(
+    include = c(gender,age_bracket,religion,education,household_size),
+    missing = "no" # don't list missing data separately
+  ) |>
+  add_n() |> # add column with total number of non-missing observations
+  # test for a difference between groups
+  modify_header(label = "**Variable**") # update the column header
+
+```
+
+```{r}
+sanitation_clean |>
+  tbl_cross(row = employment_status,
+            col = willingness_to_invest,
+            percent = "cell") |>
+  add_p() |> # update the column header
+  modify_header(label = "**Variable**") |>
+  bold_labels()
+```
