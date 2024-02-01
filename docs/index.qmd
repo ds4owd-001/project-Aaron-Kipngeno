@@ -92,6 +92,11 @@ education_levels <- c("no education", "primary", "secondary", "college", "univer
 sanitation_clean <- sanitation_clean |>
   mutate(education = factor(education,levels = education_levels))
 
+income_levels <- c("0-1000", "1001-5000", "5001-10000", "10001-20000","20001-50000", "50001")
+sanitation_clean <- sanitation_clean |>
+  mutate(income = factor(income, levels = income_levels))
+
+
 religion_levels <- c("christian",  "muslim", "Other")
 sanitation_clean <- sanitation_clean |>
   mutate(religion = factor(religion, levels = religion_levels))
@@ -112,7 +117,6 @@ sanitation_clean <- sanitation_clean |>
          benefit_of_use_latrine = factor(benefit_of_use_latrine),
          sanitation_organizations = factor(sanitation_organizations),
          know_sanitation = factor(know_sanitation),
-         income = factor(income),
          cost_of_latrine = (cost_of_latrine),
          sanitation_laws = factor(sanitation_laws))
 attach(sanitation_clean)
@@ -215,12 +219,20 @@ bargrap1 <- ggplot(data = sanitation_clean,
   geom_bar(stat = "count")+
   facet_grid(~willingness_to_invest)
 
+
+sanitation_clean |>
+filter(!is.na(income)) |>
+ggplot(aes(household_size))+
+  geom_point( stat = "count",aes(color = presence_of_latrine), alpha = 0.5)+
+  facet_grid(willingness_to_invest ~ know_sanitation)
+        
+
 ```
 
 #saving data file
 
 ```{r}
-write_csv(x = sanitation_clean, "/cloud/project/data/processed/sanitation_clean.csv")
+write_csv(x = sanitation_clean, "/cloud/project/data/processed/sanitation_clean.csv" )
 ```
 
 ## Data analysis
@@ -229,9 +241,7 @@ write_csv(x = sanitation_clean, "/cloud/project/data/processed/sanitation_clean.
 library(gtsummary)
 library(ggplot2)
 library(gt)
-library(ggplot2)
 library(tidyverse)
-
 ```
 
 Data import
@@ -246,8 +256,8 @@ sanitation_clean <- read_csv(here::here("/cloud/project/data/processed/sanitatio
 
 ```{r}
 table1 <- sanitation_clean |> 
-  tbl_summary(include = c(gender,age_bracket,religion,education,household_size)) |>
-   modify_header(label = "**Variable**")
+  tbl_summary(include = c(gender,age_bracket,religion,education,household_size))
+
 ```
 
 #data visualization showing distribution of demographic characteristics of respondents
@@ -298,7 +308,6 @@ sanitation_clean |>
   tbl_summary(include = c(willingness_to_invest)) |>
   as_gt() |>
  gtsave(file = "table.html")
-
 sanitation_clean |>
   tbl_cross(row = level_of_willingness,
             col = willingness_to_invest,
@@ -311,8 +320,6 @@ sanitation_clean |>
 #social factors and willingess to invest in sanitation
 
 ```{r}
-# build of regression model
-
 ```
 
 #economic factors and willingess to invest in sanitation
