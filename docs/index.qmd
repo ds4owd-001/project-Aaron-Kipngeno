@@ -58,7 +58,6 @@ mutate(id = row_number()) |>
   relocate(id) |> 
   janitor::clean_names()
 
-
 sanitation_clean <- sanitation_clean |>
        rename(community_health_officers =  "source_of_information_community_health_volunteers",
       media ="source_of_information_media",
@@ -70,9 +69,7 @@ sanitation_clean <- sanitation_clean |>
 motivating_factors = "if_yes_motivating_factors",)
 
 sanitation_clean <- sanitation_clean |> 
-  rename(public_health_officers = "source_of_information_public_health_officers"
-)
-
+  rename(public_health_officers = "source_of_information_public_health_officers")
 
 #removing column
 sanitation_clean$source_of_information = NULL
@@ -141,8 +138,6 @@ sanitation_information|>
   group_by(information) |> 
   count() |>
   mutate(percent = n / nrow(sanitation) * 100)
-
-
 
 #2 What are the consequences of not using latrines?(mark all that apply)
 
@@ -229,16 +224,15 @@ write_csv(x = sanitation_clean, "/cloud/project/data/processed/sanitation_clean.
 ```
 
 ## Data analysis
+
 ```{r}
 library(gtsummary)
 library(ggplot2)
 library(gt)
 library(ggplot2)
 library(tidyverse)
-library(dplyr)
 
 ```
-
 
 Data import
 
@@ -248,7 +242,6 @@ Data import
 sanitation_clean <- read_csv(here::here("/cloud/project/data/processed/sanitation_clean.csv"))
 ```
 
-
 ### demographic information of the respondents
 
 ```{r}
@@ -257,8 +250,8 @@ table1 <- sanitation_clean |>
    modify_header(label = "**Variable**")
 ```
 
+#data visualization showing distribution of demographic characteristics of respondents
 
-#data visualization showing distribution of demographic characteristics of respondents 
 ```{r}
 #pie chart for gender distributions 
 #Create a data frame with the gender distribution
@@ -270,6 +263,13 @@ ggplot(gender_data, aes(x = "", y = count, fill = gender)) +
   geom_bar(stat = "identity", width = 1) +
   coord_polar("y") +
   labs(title = "Figure 1. Distribution of respondents by gender", fill = "gender") +
+  theme_minimal()
+
+#bar graph for education with error bar.
+
+ ggplot(sanitation_clean, aes(education)) +
+  geom_bar(stat = "count", fill = "skyblue") +
+  labs(title = "Education Level Counts", x = "Education Level", y = "Count") +
   theme_minimal()
 
 
@@ -290,42 +290,29 @@ ggplot(sanitation_clean, aes(x = household_size)) +
        y = "Count")
 ```
 
-#willingess to invest in sanitation
+#willingness to invest in sanitation
 
 ```{r}
-library(gtsummary)
-sanitation_clean |> 
-  tbl_summary(include = c(willingness_to_invest))
 
+sanitation_clean |> 
+  tbl_summary(include = c(willingness_to_invest)) |>
+  as_gt() |>
+ gtsave(file = "table.html")
 
 sanitation_clean |>
   tbl_cross(row = level_of_willingness,
             col = willingness_to_invest,
             percent = "cell") |> 
-  add_p()
- # update the column header
-
-
+  add_p() 
+  
 
 ```
 
+#social factors and willingess to invest in sanitation
 
+```{r}
+# build of regression model
 
+```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#economic factors and willingess to invest in sanitation
