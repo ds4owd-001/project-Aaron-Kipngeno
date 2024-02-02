@@ -12,7 +12,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-```{r echo= TRUE}
+```{r echo= FALSE}
 #| label: load-packages
 library(readr)
 library(tidyverse)
