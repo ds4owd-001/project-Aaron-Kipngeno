@@ -12,7 +12,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-```{r}
+```{r echo= TRUE}
 #| label: load-packages
 library(readr)
 library(tidyverse)
@@ -34,8 +34,6 @@ objectives of the study
 
 ```{r}
 sanitation <- read_csv(here::here("data/raw/Sanitation_investiment.csv"))
-
-  
 ```
 
 ### Explore data
@@ -96,7 +94,6 @@ income_levels <- c("0-1000", "1001-5000", "5001-10000", "10001-20000","20001-500
 sanitation_clean <- sanitation_clean |>
   mutate(income = factor(income, levels = income_levels))
 
-
 religion_levels <- c("christian",  "muslim", "Other")
 sanitation_clean <- sanitation_clean |>
   mutate(religion = factor(religion, levels = religion_levels))
@@ -142,6 +139,19 @@ sanitation_information|>
   group_by(information) |> 
   count() |>
   mutate(percent = n / nrow(sanitation) * 100)
+
+# Create a bar plot for the summarized categorical data
+sanitation_information |>
+  filter(answer == 1) |>
+  group_by(information) |>
+  count() |>
+  mutate(percent = n / nrow(sanitation) * 100) |>
+  ggplot(aes(x = information, y = percent, fill = information)) +
+  geom_bar(stat = "identity", position = position_dodge()) +
+   geom_errorbar(aes(ymin = percent - 1, ymax = percent + 1), width = 0.5, color = "black") + 
+  labs(title = "Source of Sanitation Information", x = "Information", y = "Percentage") +
+  theme_classic()
+
 
 #2 What are the consequences of not using latrines?(mark all that apply)
 
@@ -203,30 +213,32 @@ type_of_latrine <- sanitation_clean |>
   filter(!is.na(type_latrine_own)) |>
   group_by(type_latrine_own) |>
   count()
-
-
 ```
 
 ### Data visualization
 
 ```{r}
 library(ggplot2)
+# plot1- bar graph
+ggplot(data = sanitation_clean, aes(x = age_bracket, fill = age_bracket)) +
+  geom_bar(stat = "count", position = position_dodge()) +
+  facet_grid(~willingness_to_invest) +
+  ggtitle("Willingeness to invest in sanitation facilities by Age Bracket") +
+  labs(x = "Age Bracket", y = "Count")
 
-# create bar graph, showing age bracket against willingess to invest in sanitation facilities(facetgrid).
-
-bargrap1 <- ggplot(data = sanitation_clean, 
-       aes(x = age_bracket, fill = age_bracket))+
-  geom_bar(stat = "count")+
-  facet_grid(~willingness_to_invest)
-
-
+#plot2- scatter plot
 sanitation_clean |>
 filter(!is.na(income)) |>
 ggplot(aes(household_size))+
   geom_point( stat = "count",aes(color = presence_of_latrine), alpha = 0.5)+
   facet_grid(willingness_to_invest ~ know_sanitation)
-        
 
+#plot- box plot
+# Create a box plot
+ggplot(sanitation_clean, aes(x = education, y = household_size)) +
+  geom_boxplot(fill = "skyblue") +
+  labs(title = "Household Size Distribution by eduction level", x = "education level", y = "household size") +
+  theme_classic()
 ```
 
 #saving data file
@@ -247,7 +259,7 @@ library(tidyverse)
 Data import
 
 ```{r}
-#importing processed data
+#importing proccesed data
 
 sanitation_clean <- read_csv(here::here("/cloud/project/data/processed/sanitation_clean.csv"))
 ```
@@ -255,12 +267,28 @@ sanitation_clean <- read_csv(here::here("/cloud/project/data/processed/sanitatio
 ### demographic information of the respondents
 
 ```{r}
-table1 <- sanitation_clean |> 
-  tbl_summary(include = c(gender,age_bracket,religion,education,household_size))
-
+table1 <- sanitation_clean |>
+  select(gender, age_bracket, religion, education, household_size) %>%
+  tbl_summary(
+    statistic = list(all_continuous() ~ "{mean} ± {sd}")
+  )
+# Create a gt table
+table1 |>
+  as_gt() |>
+  tab_header(
+    title = "Demographic information of the respondents"
+  ) |>
+  tab_style(
+    style = list(
+      cell_text(size = "12px"),
+      cell_fill(color = "#f7f7f7"),
+      cell_borders(sides = "all", color = "white", weight = "1px")
+    ),
+    locations = cells_body()
+  )
 ```
 
-#data visualization showing distribution of demographic characteristics of respondents
+#data visualization of demographic characteristics of respondents
 
 ```{r}
 #pie chart for gender distributions 
@@ -276,28 +304,35 @@ ggplot(gender_data, aes(x = "", y = count, fill = gender)) +
   theme_minimal()
 
 #bar graph for education with error bar.
-
- ggplot(sanitation_clean, aes(education)) +
+ggplot(sanitation_clean, aes(education, fill = education)) +
   geom_bar(stat = "count", fill = "skyblue") +
-  labs(title = "Education Level Counts", x = "Education Level", y = "Count") +
+  labs(title = "Education Level Counts", x = "Education Level", y = "count") +
   theme_minimal()
 
-
- # bar graph showing age_bracket of respondents against frequency "count"
+#bar graph showing age_bracket of respondents against frequency "count"
 ggplot(sanitation_clean, aes(x = age_bracket, fill = age_bracket)) +
   geom_bar(stat = "count") +
   labs(title = " Table 1 : Frequency of Respondents by Age Bracket", x = "Age Bracket", y = "Count")
-
+#bar graph showing relogion of respondents against frequency "count"
 ggplot(sanitation_clean,
        aes(x = religion, fill = religion))+
   geom_bar(stat = "count")+
   labs(title = " Table 2: Frequency of Respondents by religion", x = "religion", y = "Count")
 
+# Create a histogram for the household_size variable
+# Calculate the mean, standard deviation, and size of data
+mean_hs <- mean(sanitation_clean$household_size)
+sd_hs <- sd(sanitation_clean$household_size)
+size_hs <- nrow(sanitation_clean)
+
+# Create a histogram for the household_size variable
 ggplot(sanitation_clean, aes(x = household_size)) +
-  geom_bar(stat = "count", colour = "orange") +
-  labs(title = " Table 3; Household Size Distribution",
-       x = "Household Size",
-       y = "Count")
+  geom_histogram(binwidth = 1, fill = "skyblue", color = "orange", alpha = 0.7) +
+  stat_function(fun = dnorm, args = list(mean = mean_hs, sd = sd_hs), color = "red", size = 1)+
+  annotate("text", x = 1, y = 20, label = paste("Mean:", round(mean_hs, 2), "\nSD:", round(sd_hs, 2), "\nSize:", size_hs), color = "black", size = 4) +
+  labs(title = "Household Size Distribution", x = "Household Size", y = "Count") +
+  theme_minimal()
+
 ```
 
 #willingness to invest in sanitation
@@ -317,9 +352,40 @@ sanitation_clean |>
 
 ```
 
-#social factors and willingess to invest in sanitation
+#social factors and willingness to invest in sanitation
 
 ```{r}
+library(epitools)
+
+c1 <- table(willingness_to_invest, know_sanitation)
+chisq_result <- chisq.test(c1)
+odds_ratio <- oddsratio(c1)
+
+# Create a table for the chi-squared test results
+chisq_table <- data.frame(
+  Test = c("X-squared", "df", "p-value"),
+  Value = c(chisq_result$statistic, chisq_result$parameter, chisq_result$p.value)
+)
+
+# Create a table for the odds ratio results
+odds_ratio_table <- data.frame(
+  willingness_to_invest = c("no", "yes"),
+  estimate = c(odds_ratio$measure[1, "estimate"], odds_ratio$measure[2, "estimate"]),
+  lower = c(odds_ratio$measure[1, "lower"], odds_ratio$measure[2, "lower"]),
+  upper = c(odds_ratio$measure[1, "upper"], odds_ratio$measure[2, "upper"]),
+  p_value = c(odds_ratio$p.value[2, "midp.exact"], odds_ratio$p.value[2, "midp.exact"])
+)
+
+# Create the gt tables
+chisq_gt <- gt(chisq_table) |> 
+  tab_header(title = "Chi-squared Test Results")
+
+odds_ratio_gt <- gt(odds_ratio_table) |> 
+  tab_header(title = "Odds Ratio Results")
+
+# Print the tables
+print(chisq_gt)
+print(odds_ratio_gt)
 ```
 
-#economic factors and willingess to invest in sanitation
+#economic factors and willingness to invest in sanita
