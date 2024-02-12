@@ -9,7 +9,7 @@
 -   First name: Aaron
 -   Surname: Kipngeno
 -   ORCID : 0009 0007 0854 3201
--   Email:[aronkemboi01\@gmail.com](mailto:aronkemboi01@gmail.com){.email}
+-   Email: [aronkemboi01\@gmail.com](mailto:aronkemboi01@gmail.com){.email}
 
 3.  Date of data collection (single date, range, approximate date): Data was collected within two weeks from 1st to 14th December.
 
@@ -29,9 +29,9 @@ Recommended: This work is licensed under the Creative Commons Attribution 4.0 In
 
 ## Methodological information
 
-1.  Description of methods used for collection/generation of data: Data used is primary data, collected randomly selected 100 households in Bomet County.
+1.  Description of methods used for collection/generation of data: Data used is primary data, collected randomly from selected 100 households in Bomet County.
 
-2.  Methods for processing the data:Data was processed for this work using statistical methods.
+2.  Methods for processing the data : Data was processed for this work using statistical methods.
 
 3.  Software-specific information needed to interpret the data: Data was analysed and interpreted using R programming language in R-studio.
 
