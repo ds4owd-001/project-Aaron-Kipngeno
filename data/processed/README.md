@@ -11,7 +11,7 @@
 -   ORCID : 0009 0007 0854 3201
 -   Email:[aronkemboi01\@gmail.com](mailto:aronkemboi01@gmail.com){.email}
 
-3.  Date of data collection (single date, range, approximate date): Data was collect
+3.  Date of data collection (single date, range, approximate date): Data was collected within two weeks from 1st to 14th December.
 
 4.  Geographic location of data collection: Bomet, Kenya
 
