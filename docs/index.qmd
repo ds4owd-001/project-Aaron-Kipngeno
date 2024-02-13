@@ -18,7 +18,6 @@ editor_options:
 #| label: load-packages
 library(readr)
 library(tidyverse)
-knitr::write_bib(c("rmarkdown"), file = "citations.bib")
 ```
 
 # Introduction
@@ -36,6 +35,14 @@ The traditional community-led total sanitation (CLTS) approach, as used in Bomet
 #2. To determine the demographic and socio-cultural factors that influences the willingness to invest in sanitation facilities by households in Bomet Sub-county.
 
 #3. To determine the economic and financial factors that influences the willingness to invest in sanitation facilities by householdsin Bomet Sub-county.
+
+# Methodology
+
+Study was Conducted in Bomet County, in Kenya. The sample size was determined using @yamane1973statistics follows: n=N/(1+N(e2) Where, n= desired sample N=Total number of households 30,086 e=sampling error (taken to be ±10%) =30, 806 / (1+30, 806 (0.12).the sample was 100 households. Cluster and simple random sampling technique was used to select households.
+
+Data was analysed using Rtool software for descrptive statistics such frequency, percentage, mean and standrard deviations. Findings was presented using tables, and charts. Inferential statistisc was computed using chi–square test , to examine associations of social and economic factors , and willingness to invest in sanitations.
+
+Ehical considitations was sought in this study.
 
 ## Data Import
 
@@ -252,7 +259,7 @@ box_plot <- ggplot(sanitation_clean, aes(x = education, y = household_size)) +
 write_csv(x = sanitation_clean, "/cloud/project/data/processed/sanitation_clean.csv" )
 ```
 
-## Data analysis
+# Results
 
 ```{r}
 library(gtsummary)
@@ -363,9 +370,9 @@ sanitation_clean |>
 
 ### #social factors and willingness to invest in sanitation
 
-#associations of gender,age, religion, know sanitatio, presence of latrine, benefit of use of toilet, sanitation laws
+Stdudy investiagted associations of gender,age, religion, knowledge on satiationn, presence of latrine, benefit of use of toilet, sanitation laws and willingness to invest in sanitation
 
-#### #chi-Sqaure test statistics
+#### #chi-Square test statistics
 
 A Pearson's chi-squared test was conducted to examine the relationship between Social factors and willingness to invest in sanitation.
 
@@ -404,21 +411,38 @@ chisq.test(s6)
 
 ### #economic factors and willingness to invest in sanitation
 
-the study investigated influence of employement status, household income , sanitation organizations, knowldge on finacial institutions,
+the study investigated influence of employement status, household income , sanitation organizations, knowldge on finacial institutions, and beng member to saving and lending groups.
 
 #chi-square test statistics.
 
 ```{r}
+#ingluence of employement status
+#no significant association p value = 0.02 > 0.005
 e1 <- table(sanitation_clean$willingness_to_invest, sanitation_clean$employement_status)
 chisq.test(e1)
 
+# influnce of household income
+#The analysis revealed a significant association, χ²(4, N = [99]) = 16.22, p = 0.0027
 e2 <- table(sanitation_clean$willingness_to_invest, sanitation_clean$income)
 chisq.test(e2)
 
+#presence sanitation organizations
+#the analysis revealed a significant association, χ²(1, N = [99]) = 12.07, p = 0.0005
 e3 <- table(sanitation_clean$willingness_to_invest, sanitation_clean$sanitation_organizations)
 chisq.test(e3)
-
-e4<- table(sanitation_clean$willingness_to_invest, sanitation_clean$knowledge_on_financial_institutions)
+# influence of being member of saving and lending groups
+# signifiacnt association at χ²(1, N= 99)= 10.692, p = 001. 
+e4<- table(sanitation_clean$willingness_to_invest, sanitation_clean$member_to_savings_and_lendings_groups)
 chisq.test(e4)
 
 ```
+
+# Conclusions
+
+The study found that the majority of respondents, 76%, were willing to invest in sanitation. There could be several reasons for this willingness, including the desire for personal safety and privacy, fear of penalties and fines, fear of disease outbreaks, raising social status, and the need for a safe place for defecation/urination.
+
+The study found that the majority of social factors investigated had no significant associations with the willingness to invest in sanitation, except for the benefit of use and the presence of a toilet, which showed significant associations at a p-value of less than .005. This could be due to various reasons, including the specific emphasis on the benefit of use and the presence of a toilet in influencing individuals' decisions to invest in sanitation. Additionally, the findings may suggest that these two factors, in particular, play a more prominent role in shaping attitudes and behaviors towards sanitation investment compared to other social factors that were examined in the study
+
+Several economic factors were found to have significant associations with the willingness to invest in sanitation, including household income, the presence of organizations that promote sanitation, and being a member of saving and lending groups at p value (\<.005). This could be due to increasing access to financial resources and promoting economic development could help to improve sanitation investment.
+
+# References
