@@ -11,12 +11,14 @@ execute:
 editor_options: 
   chunk_output_type: console
   bibliography: citations.bib
+  cls: 
 ---
 
 ```{r echo= FALSE}
 #| label: load-packages
 library(readr)
 library(tidyverse)
+knitr::write_bib(c("rmarkdown"), file = "citations.bib")
 ```
 
 # Introduction
@@ -25,8 +27,7 @@ The United Nations Sustainable Development Goal 6.2 aims to achieve access to ad
 
 Access to improved sanitation in Kenya remains a significant challenge, with only about 32% of the population having access to basic sanitation facilities. This lack of access has led to more than 6 million Kenyans practicing open defecation, contributing to the prevalence of diseases such as diarrhea, typhoid, and cholera. In economic terms, poor sanitation leads to a loss of 0.9% of Kenya's gross domestic product (GDP) annually. In Bomet County access to improve sanitation is still low at 41% [@dhs_2023]. The effect of poor sanitation on health in Bomet is significant, with over 40% of diarrheal illnesses and intestinal worm infestations attributed to it, as indicated by the Ministry of Health records. Investing in sanitation facilities is crucial to reducing these cases. However, many people do not prioritize sanitation on their investment agenda\[ @koskei2013\]
 
-The traditional community-led total sanitation (CLTS) approach, as used in Bomet, proposes that once people are made aware of their sanitation problems, they can take action
-to improve their sanitation status using locally available materials [@njuguna2019a] whether to construc these facilities depends on people's willingness, preferences, and ability to pay for the facility of their choice. A study by [@mulatya2021] pointed out that various factors, including demographic, socio-cultural, economic, and financial factors to have influence on Households' willingness, in rural areas of Siaya, Kakamega, and Makueni counties. the findings may not apply to Bomet due to unique contextual factors.
+The traditional community-led total sanitation (CLTS) approach, as used in Bomet, proposes that once people are made aware of their sanitation problems, they can take action to improve their sanitation status using locally available materials [@njuguna2019a] whether to construc these facilities depends on people's willingness, preferences, and ability to pay for the facility of their choice. A study by [@mulatya2021] pointed out that various factors, including demographic, socio-cultural, economic, and financial factors to have influence on Households' willingness, in rural areas of Siaya, Kakamega, and Makueni counties. the findings may not apply to Bomet due to unique contextual factors.
 
 ### Objective of the study
 
@@ -224,25 +225,25 @@ type_of_latrine <- sanitation_clean |>
 ```{r}
 library(ggplot2)
 # plot1- bar graph
-ggplot(data = sanitation_clean, aes(x = age_bracket, fill = age_bracket)) +
+bar_graph <- ggplot(data = sanitation_clean, aes(x = age_bracket, fill = age_bracket)) +
   geom_bar(stat = "count", position = position_dodge()) +
   facet_grid(~willingness_to_invest) +
   ggtitle("Willingeness to invest in sanitation facilities by Age Bracket") +
   labs(x = "Age Bracket", y = "Count")
 
 #plot2- scatter plot
-sanitation_clean |>
+scatter_plot <- sanitation_clean |>
 filter(!is.na(income)) |>
 ggplot(aes(household_size))+
   geom_point( stat = "count",aes(color = presence_of_latrine), alpha = 0.5)+
   facet_grid(willingness_to_invest ~ know_sanitation)
-
 #plot- box plot
 # Create a box plot
-ggplot(sanitation_clean, aes(x = education, y = household_size)) +
+box_plot <- ggplot(sanitation_clean, aes(x = education, y = household_size)) +
   geom_boxplot(fill = "skyblue") +
   labs(title = "Household Size Distribution by eduction level", x = "education level", y = "household size") +
   theme_classic()
+
 ```
 
 #saving data file
@@ -268,19 +269,21 @@ Data import
 sanitation_clean <- read_csv(here::here("/cloud/project/data/processed/sanitation_clean.csv"))
 ```
 
-### demographic information of the respondents
+### demographic information of the respondentst
+
+#table-1.0 shows the distribution of respondents by gender, age bracket, religion, and household size. The majority of the respondents were male (49%), and the majority of the respondents' age bracket was 36-45 (30%). In terms of religion, the majority of the respondents reported being Christian (69%). The household size in Bomet County ranged from 2 to 8 persons, with a mean of approximately 4.77 and a standard deviation of 1.44. as shown in fig_1
 
 ```{r}
 table1 <- sanitation_clean |>
-  select(gender, age_bracket, religion, education, household_size) %>%
+  select(gender, age_bracket, religion, education) |>
   tbl_summary(
     statistic = list(all_continuous() ~ "{mean} ± {sd}")
   )
 # Create a gt table
-table1 |>
+ table1 |>
   as_gt() |>
   tab_header(
-    title = "Demographic information of the respondents"
+    title = " Table 1.0: Demographic information of the respondents"
   ) |>
   tab_style(
     style = list(
@@ -290,9 +293,10 @@ table1 |>
     ),
     locations = cells_body()
   )
+ summary(household_size)
 ```
 
-#data visualization of demographic characteristics of respondents
+### #data visualization of demographic characteristics of respondents
 
 ```{r}
 #pie chart for gender distributions 
@@ -328,9 +332,8 @@ ggplot(sanitation_clean,
 mean_hs <- mean(sanitation_clean$household_size)
 sd_hs <- sd(sanitation_clean$household_size)
 size_hs <- nrow(sanitation_clean)
-
-# Create a histogram for the household_size variable
-ggplot(sanitation_clean, aes(x = household_size)) +
+#Create a histogram for the household_size variable
+fig_1 <- ggplot(sanitation_clean, aes(x = household_size)) +
   geom_histogram(binwidth = 1, fill = "skyblue", color = "orange", alpha = 0.7) +
   stat_function(fun = dnorm, args = list(mean = mean_hs, sd = sd_hs), color = "red", size = 1)+
   annotate("text", x = 1, y = 20, label = paste("Mean:", round(mean_hs, 2), "\nSD:", round(sd_hs, 2), "\nSize:", size_hs), color = "black", size = 4) +
@@ -339,11 +342,15 @@ ggplot(sanitation_clean, aes(x = household_size)) +
 
 ```
 
-#willingness to invest in sanitation
+### #willingness to invest in sanitation
+
+Table_2 shows, majority of respondents 76% were willing to investigate. The study investigate the level of willingness, 29% were not willing, 20% very much willing and 48% were willing to invest, with significant associations at p-Value (0.001) as shown in Table_3
 
 ```{r}
-
-sanitation_clean |> 
+Table_2 <- sanitation_clean |> 
+  tbl_summary(include = c(willingness_to_invest))
+  
+Table_3 <- sanitation_clean |> 
   tbl_summary(include = c(willingness_to_invest)) |>
   as_gt() |>
  gtsave(file = "table.html")
@@ -351,40 +358,67 @@ sanitation_clean |>
   tbl_cross(row = level_of_willingness,
             col = willingness_to_invest,
             percent = "cell") |> 
-  add_p() 
-  
-
+  add_p()
 ```
 
-#social factors and willingness to invest in sanitation
+### #social factors and willingness to invest in sanitation
+
+#associations of gender,age, religion, know sanitatio, presence of latrine, benefit of use of toilet, sanitation laws
+
+#### #chi-Sqaure test statistics
+
+A Pearson's chi-squared test was conducted to examine the relationship between Social factors and willingness to invest in sanitation.
 
 ```{r}
-library(epitools)
-c1 <- table(willingness_to_invest, know_sanitation)
-chisq_result <- chisq.test(c1)
-odds_ratio <- oddsratio(c1)
 
-# Create a table for the chi-squared test results
-chisq_table <- data.frame(
-  Test = c("X-squared", "df", "p-value"),
-  Value = c(chisq_result$statistic, chisq_result$parameter, chisq_result$p.value)
-)
+#genderand willinness to invest
+##The results indicated a non-significant association between the two variables, χ²(df = 2, N = [99]) = 3.06, p = 0.216
 
-# Create a table for the odds ratio results
-odds_ratio_table <- data.frame(
-  willingness_to_invest = c("no", "yes"),
-  estimate = c(odds_ratio$measure[1, "estimate"], odds_ratio$measure[2, "estimate"]),
-  lower = c(odds_ratio$measure[1, "lower"], odds_ratio$measure[2, "lower"]),
-  upper = c(odds_ratio$measure[1, "upper"], odds_ratio$measure[2, "upper"]),
-  p_value = c(odds_ratio$p.value[2, "midp.exact"], odds_ratio$p.value[2, "midp.exact"])
-)
+s1 <- table(sanitation_clean$willingness_to_invest, sanitation_clean$gender)
+chisq.test(s1)
 
-# Create the gt tables
-chisq_gt <- gt(chisq_table) |> 
-  tab_header(title = "Chi-squared Test Results")
+#willingness to invest and age bracket 
+#The test yielded a chi-squared statistic of 1.3313 with 4 degrees of freedom, and a p-value of 0.856. This suggests that there is no evidence to reject the null hypothesis, indicating that there is no association between the variables
 
-odds_ratio_gt <- gt(odds_ratio_table) |> 
-  tab_header(title = "Odds Ratio Results")
+s2 <- table(sanitation_clean$willingness_to_invest, sanitation_clean$age_bracket)
+chisq.test(s2)
+
+# willingess to invest & religion
+#The analysis revealed no significant association, χ²(df = 2, N = 99) = 9.85, p = 0.0073
+s3 <- table(sanitation_clean$willingness_to_invest, sanitation_clean$religion)
+chisq.test(s3)
+
+#willingness to invest and presence of latine
+#The analysis revealed a significant association, χ²(1, N = [99]) = 13.38, p = 0.0003
+s4 <- table(sanitation_clean$willingness_to_invest, sanitation_clean$presence_of_latrine)
+chisq.test(s4)
+# willingness to invest & benefit to use llatrine
+#The analysis revealed a significant association, χ²(2, N = [99) = 19.33, p = 6.34e-05
+s5 <- table(sanitation_clean$willingness_to_invest, sanitation_clean$benefit_of_use_latrine)
+chisq.test(s5)
+
+#willingess to invest in sanitation& sanitation laws
+s6 <-table(sanitation_clean$willingness_to_invest, sanitation_clean$sanitation_laws)
+chisq.test(s6)
 ```
 
-#economic factors and willingness to invest in sanitation
+### #economic factors and willingness to invest in sanitation
+
+the study investigated influence of employement status, household income , sanitation organizations, knowldge on finacial institutions,
+
+#chi-square test statistics.
+
+```{r}
+e1 <- table(sanitation_clean$willingness_to_invest, sanitation_clean$employement_status)
+chisq.test(e1)
+
+e2 <- table(sanitation_clean$willingness_to_invest, sanitation_clean$income)
+chisq.test(e2)
+
+e3 <- table(sanitation_clean$willingness_to_invest, sanitation_clean$sanitation_organizations)
+chisq.test(e3)
+
+e4<- table(sanitation_clean$willingness_to_invest, sanitation_clean$knowledge_on_financial_institutions)
+chisq.test(e4)
+
+```
