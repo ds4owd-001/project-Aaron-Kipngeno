@@ -10,6 +10,7 @@ execute:
   warning: false
 editor_options: 
   chunk_output_type: console
+  bibliography: citations.bib
 ---
 
 ```{r echo= FALSE}
@@ -18,11 +19,16 @@ library(readr)
 library(tidyverse)
 ```
 
-# Project description
+# Introduction
 
-Data analysis to determine factors that influence households willingeness to invest in sanitation facilities in Bomet Sub-county.
+The United Nations Sustainable Development Goal 6.2 aims to achieve access to adequate and equitable sanitation and hygiene for all by 2030. By, 2022, the global access to safely managed sanitation services was reported to be 57% of the population, which equates to 4.6 billion people[@who_2022]. Despite this progress, over 1.5 billion people still lacked basic sanitation services, and 419 million people still practiced open defecation in Sub-Sahara Africa (SSA) and South & central Asia.
 
-objectives of the study
+Access to improved sanitation in Kenya remains a significant challenge, with only about 32% of the population having access to basic sanitation facilities. This lack of access has led to more than 6 million Kenyans practicing open defecation, contributing to the prevalence of diseases such as diarrhea, typhoid, and cholera. In economic terms, poor sanitation leads to a loss of 0.9% of Kenya's gross domestic product (GDP) annually. In Bomet County access to improve sanitation is still low at 41% [@dhs_2023]. The effect of poor sanitation on health in Bomet is significant, with over 40% of diarrheal illnesses and intestinal worm infestations attributed to it, as indicated by the Ministry of Health records. Investing in sanitation facilities is crucial to reducing these cases. However, many people do not prioritize sanitation on their investment agenda\[ @koskei2013\]
+
+The traditional community-led total sanitation (CLTS) approach, as used in Bomet, proposes that once people are made aware of their sanitation problems, they can take action
+to improve their sanitation status using locally available materials [@njuguna2019a] whether to construc these facilities depends on people's willingness, preferences, and ability to pay for the facility of their choice. A study by [@mulatya2021] pointed out that various factors, including demographic, socio-cultural, economic, and financial factors to have influence on Households' willingness, in rural areas of Siaya, Kakamega, and Makueni counties. the findings may not apply to Bomet due to unique contextual factors.
+
+### Objective of the study
 
 #1. To assess the proportion of willingness to invest in sanitation facilities by households in Bomet Sub-county.
 
@@ -41,8 +47,6 @@ sanitation <- read_csv(here::here("data/raw/Sanitation_investiment.csv"))
 ```{r}
 head(sanitation)
 tail(sanitation)
-glimpse(sanitation)
-str(sanitation)
 nrow(sanitation)
 ncol(sanitation)
 ```
@@ -356,7 +360,6 @@ sanitation_clean |>
 
 ```{r}
 library(epitools)
-
 c1 <- table(willingness_to_invest, know_sanitation)
 chisq_result <- chisq.test(c1)
 odds_ratio <- oddsratio(c1)
@@ -382,10 +385,6 @@ chisq_gt <- gt(chisq_table) |>
 
 odds_ratio_gt <- gt(odds_ratio_table) |> 
   tab_header(title = "Odds Ratio Results")
-
-# Print the tables
-print(chisq_gt)
-print(odds_ratio_gt)
 ```
 
-#economic factors and willingness to invest in sanita
+#economic factors and willingness to invest in sanitation
