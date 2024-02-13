@@ -1,5 +1,5 @@
 ---
-title: "willingness to invest in sanitation facilities"
+title: "Willingness to invest in sanitation facilities. A case study of Bomet County, Kenya"
 date: today
 author: "Aaron Kipngeno"
 email: "aronkemboi01@gmail.com"
