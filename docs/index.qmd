@@ -11,13 +11,15 @@ execute:
 editor_options: 
   chunk_output_type: console
   bibliography: citations.bib
-  cls: 
+  csl: apa.annotated-bibliography.csl
+  link-citations: true
 ---
 
-```{r echo= FALSE}
+```{r echo = FALSE}
 #| label: load-packages
 library(readr)
 library(tidyverse)
+library(knitr)
 ```
 
 # Introduction
@@ -276,30 +278,20 @@ Data import
 sanitation_clean <- read_csv(here::here("/cloud/project/data/processed/sanitation_clean.csv"))
 ```
 
-### demographic information of the respondentst
+### demographic information of the respondents
 
-#table-1.0 shows the distribution of respondents by gender, age bracket, religion, and household size. The majority of the respondents were male (49%), and the majority of the respondents' age bracket was 36-45 (30%). In terms of religion, the majority of the respondents reported being Christian (69%). The household size in Bomet County ranged from 2 to 8 persons, with a mean of approximately 4.77 and a standard deviation of 1.44. as shown in fig_1
+@tbl_demographic shows the distribution of respondents by gender, age bracket, religion, and household size. The majority of the respondents were male (49%), and the majority of the respondents' age bracket was 36-45 (30%). In terms of religion, the majority of the respondents reported being Christian (69%). The household size in Bomet County ranged from 2 to 8 persons, with a mean of approximately 4.77 and a standard deviation of 1.44. as shown in \@ref(fig:household_size)
 
 ```{r}
-table1 <- sanitation_clean |>
+#| label: tbl_demographic
+#| tbl-cap:  Demographic informations of respondemnts 
+ sanitation_clean |>
   select(gender, age_bracket, religion, education) |>
   tbl_summary(
     statistic = list(all_continuous() ~ "{mean} ± {sd}")
-  )
-# Create a gt table
- table1 |>
-  as_gt() |>
-  tab_header(
-    title = " Table 1.0: Demographic information of the respondents"
   ) |>
-  tab_style(
-    style = list(
-      cell_text(size = "12px"),
-      cell_fill(color = "#f7f7f7"),
-      cell_borders(sides = "all", color = "white", weight = "1px")
-    ),
-    locations = cells_body()
-  )
+  as_gt() 
+ 
  summary(household_size)
 ```
 
@@ -339,28 +331,36 @@ ggplot(sanitation_clean,
 mean_hs <- mean(sanitation_clean$household_size)
 sd_hs <- sd(sanitation_clean$household_size)
 size_hs <- nrow(sanitation_clean)
+```
+
+```{r}
+#| label: household_size
+#| fig-cap: "household size distributions"
+
 #Create a histogram for the household_size variable
-fig_1 <- ggplot(sanitation_clean, aes(x = household_size)) +
+ggplot(sanitation_clean, aes(x = household_size)) +
   geom_histogram(binwidth = 1, fill = "skyblue", color = "orange", alpha = 0.7) +
   stat_function(fun = dnorm, args = list(mean = mean_hs, sd = sd_hs), color = "red", size = 1)+
   annotate("text", x = 1, y = 20, label = paste("Mean:", round(mean_hs, 2), "\nSD:", round(sd_hs, 2), "\nSize:", size_hs), color = "black", size = 4) +
   labs(title = "Household Size Distribution", x = "Household Size", y = "Count") +
   theme_minimal()
-
 ```
 
 ### #willingness to invest in sanitation
 
-Table_2 shows, majority of respondents 76% were willing to investigate. The study investigate the level of willingness, 29% were not willing, 20% very much willing and 48% were willing to invest, with significant associations at p-Value (0.001) as shown in Table_3
+@tbl-willingness shows, majority of respondents 76% were willing to investigate. The study investigate the level of willingness, 29% were not willing, 20% very much willing and 48% were willing to invest, with significant associations at p-Value (0.001) as shown in \@tbl-level.
 
 ```{r}
-Table_2 <- sanitation_clean |> 
+#|lable: tbl-willingness
+#|tbl-cap: proportion willing to invesrt in sanitaions
+sanitation_clean |> 
   tbl_summary(include = c(willingness_to_invest))
-  
-Table_3 <- sanitation_clean |> 
-  tbl_summary(include = c(willingness_to_invest)) |>
-  as_gt() |>
- gtsave(file = "table.html")
+```
+
+```{r}
+#|lable: tbl-level
+#|tbl-cap: level of willingness to invest
+
 sanitation_clean |>
   tbl_cross(row = level_of_willingness,
             col = willingness_to_invest,
@@ -370,7 +370,7 @@ sanitation_clean |>
 
 ### #social factors and willingness to invest in sanitation
 
-Stdudy investiagted associations of gender,age, religion, knowledge on satiationn, presence of latrine, benefit of use of toilet, sanitation laws and willingness to invest in sanitation
+Study investigated associations of gender,age, religion, knowledge on satiation, presence of latrine, benefit of use of toilet, sanitation laws and willingness to invest in sanitation facilities.
 
 #### #chi-Square test statistics
 
@@ -411,12 +411,12 @@ chisq.test(s6)
 
 ### #economic factors and willingness to invest in sanitation
 
-the study investigated influence of employement status, household income , sanitation organizations, knowldge on finacial institutions, and beng member to saving and lending groups.
+the study investigated influence of employement status, household income , sanitation organizations, knowldge on finacial institutions, and being member to saving and lending groups.
 
 #chi-square test statistics.
 
 ```{r}
-#ingluence of employement status
+#influence of employement status
 #no significant association p value = 0.02 > 0.005
 e1 <- table(sanitation_clean$willingness_to_invest, sanitation_clean$employement_status)
 chisq.test(e1)
