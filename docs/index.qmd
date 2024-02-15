@@ -1,53 +1,50 @@
 ---
 title: "Willingness to invest in sanitation facilities. A case study of Bomet County, Kenya"
-date: today
 author: "Aaron Kipngeno"
 email: "aronkemboi01@gmail.com"
 ORCID : 0009 0007 0854 3201
-format:
-  html:
-    embed-resources: true
-    toc: true
+date: 13-02-2024
 execute:
   warning: false
-  licence: "CC BY"
-editor_options: 
-  chunk_output_type: console
-  bibliography: citations.bib
-  csl: apa.annotated-bibliography.csl
-  link-citations: true
+format: 
+  html:
+    toc: true
+editor: visual
+bibliography: citations.bib
 ---
 
-```{r echo = FALSE}
+```{r}
 #| label: load-packages
 library(readr)
 library(tidyverse)
 library(knitr)
+library(ggplot2)
+library(usethis)
 ```
 
 # Introduction
 
-The United Nations Sustainable Development Goal 6.2 aims to achieve access to adequate and equitable sanitation and hygiene for all by 2030. By, 2022, the global access to safely managed sanitation services was reported to be 57% of the population, which equates to 4.6 billion people[@who_2022]. Despite this progress, over 1.5 billion people still lacked basic sanitation services, and 419 million people still practiced open defecation in Sub-Sahara Africa (SSA) and South & central Asia.
+The United Nations Sustainable Development Goal 6.2 aims to achieve access to adequate and equitable sanitation and hygiene for all by 2030. By, 2022, the global access to safely managed sanitation services was reported to be 57% of the population, which equates to 4.6 billion people\[ @who_notitle_2022\]. Despite this progress, over 1.5 billion people still lacked basic sanitation services, and 419 million people still practiced open defecation in Sub-Sahara Africa (SSA) and South & central Asia.
 
-Access to improved sanitation in Kenya remains a significant challenge, with only about 32% of the population having access to basic sanitation facilities. This lack of access has led to more than 6 million Kenyans practicing open defecation, contributing to the prevalence of diseases such as diarrhea, typhoid, and cholera. In economic terms, poor sanitation leads to a loss of 0.9% of Kenya's gross domestic product (GDP) annually. In Bomet County access to improve sanitation is still low at 41% [@dhs_2023]. The effect of poor sanitation on health in Bomet is significant, with over 40% of diarrheal illnesses and intestinal worm infestations attributed to it, as indicated by the Ministry of Health records. Investing in sanitation facilities is crucial to reducing these cases. However, many people do not prioritize sanitation on their investment agenda\[ @koskei2013\]
+Access to improved sanitation in Kenya remains a significant challenge, with only about 32% of the population having access to basic sanitation facilities. This lack of access has led to more than 6 million Kenyans practicing open defecation, contributing to the prevalence of diseases such as diarrhea, typhoid, and cholera. In economic terms, poor sanitation leads to a loss of 0.9% of Kenya's gross domestic product (GDP) annually. In Bomet County access to improve sanitation is still low at 41% [@noauthor_dhs_2022]. The effect of poor sanitation on health in Bomet is significant, with over 40% of diarrheal illnesses and intestinal worm infestations attributed to it, as indicated by the Ministry of Health records. Investing in sanitation facilities is crucial to reducing these cases. However, many people do not prioritize sanitation on their investment agenda[@koskei_effect_2013]
 
-The traditional community-led total sanitation (CLTS) approach, as used in Bomet, proposes that once people are made aware of their sanitation problems, they can take action to improve their sanitation status using locally available materials [@njuguna2019a] whether to construc these facilities depends on people's willingness, preferences, and ability to pay for the facility of their choice. A study by [@mulatya2021] pointed out that various factors, including demographic, socio-cultural, economic, and financial factors to have influence on Households' willingness, in rural areas of Siaya, Kakamega, and Makueni counties. the findings may not apply to Bomet due to unique contextual factors.
+The traditional community-led total sanitation (CLTS) approach, as used in Bomet, proposes that once people are made aware of their sanitation problems, they can take action to improve their sanitation status using locally available materials [@njuguna_progress_2019] whether to construc these facilities depends on people's willingness, preferences, and ability to pay for the facility of their choice. A study by [@mulatya_willingness_2021] pointed out that various factors, including demographic, socio-cultural, economic, and financial factors to have influence on Households' willingness, in rural areas of Siaya, Kakamega, and Makueni counties. the findings may not apply to Bomet due to unique contextual factors.
 
 ### Objective of the study
 
 #1. To assess the proportion of willingness to invest in sanitation facilities by households in Bomet Sub-county.
 
-#2. To determine the demographic and socio-cultural factors that influences the willingness to invest in sanitation facilities by households in Bomet Sub-county.
+#2. To determine the demographic and social-cultural factors that influences the willingness to invest in sanitation facilities by households in Bomet Sub-county.
 
-#3. To determine the economic and financial factors that influences the willingness to invest in sanitation facilities by householdsin Bomet Sub-county.
+#3. To determine the economic and financial factors that influences the willingness to invest in sanitation facilities by household sin Bomet Sub-county.
 
 # Methodology
 
 Study was Conducted in Bomet County, in Kenya. The sample size was determined using @yamane1973statistics follows: n=N/(1+N(e2) Where, n= desired sample N=Total number of households 30,086 e=sampling error (taken to be ±10%) =30, 806 / (1+30, 806 (0.12).the sample was 100 households. Cluster and simple random sampling technique was used to select households.
 
-Data was analysed using Rtool software for descrptive statistics such frequency, percentage, mean and standrard deviations. Findings was presented using tables, and charts. Inferential statistisc was computed using chi–square test , to examine associations of social and economic factors , and willingness to invest in sanitations.
+Data was analysed using R tool software for descriptive statistics such frequency, percentage, mean and standard deviations. Findings was presented using tables, and charts. Inferential statistics was computed using chi–square test , to examine associations of social and economic factors , and willingness to invest in sanitation.
 
-Ehical considitations was sought in this study.
+Ethical considerations was sought in this study.
 
 ## Data Import
 
@@ -57,7 +54,7 @@ sanitation <- read_csv(here::here("data/raw/Sanitation_investiment.csv"))
 
 ### Explore data
 
-```{r}
+```{r echo=FALSE}
 head(sanitation)
 tail(sanitation)
 nrow(sanitation)
@@ -66,7 +63,7 @@ ncol(sanitation)
 
 ## data cleaning
 
-```{r}
+```{r, echo=FALSE}
 #data transformations - rename/relocate/muatate/removing 
 sanitation_clean <- sanitation |>
 mutate(id = row_number()) |>
@@ -96,7 +93,7 @@ sanitation_clean$impacts_of_open_defecation = NULL
 
 ### converting categorical variables to factors
 
-```{r}
+```{r, echo=FALSE}
 sanitation_clean <- sanitation_clean |>
   mutate(age_bracket = factor(age_bracket))
 
@@ -143,7 +140,9 @@ levels(sanitation_clean$benefit_of_use_latrine)
 
 ### data cleaning for multiple choice questions
 
-```{r}
+```{r echo=FALSE}
+#| label: fig-information
+#| fig-cap: "a bar grap of source of informations"
 #1 Where do you mainly get information on sanitation?
 
 sanitation_information <- sanitation_clean |> 
@@ -168,7 +167,9 @@ sanitation_information |>
    geom_errorbar(aes(ymin = percent - 1, ymax = percent + 1), width = 0.5, color = "black") + 
   labs(title = "Source of Sanitation Information", x = "Information", y = "Percentage") +
   theme_classic()
+```
 
+```{r echo=FALSE}
 
 #2 What are the consequences of not using latrines?(mark all that apply)
 
@@ -224,7 +225,7 @@ loan_factors |>
   mutate(percent = n / nrow(sanitation) * 100)
 ```
 
-```{r}
+```{r, echo=FALSE}
 #filter function
 type_of_latrine <- sanitation_clean |>
   filter(!is.na(type_latrine_own)) |>
@@ -234,28 +235,39 @@ type_of_latrine <- sanitation_clean |>
 
 ### Data visualization
 
-```{r}
-library(ggplot2)
+```{r, echo=FALSE}
+#| label: fig-age
+#| fig-cap: "Willingeness to invest in sanitation facilities by Age Bracke "
+
 # plot1- bar graph
-bar_graph <- ggplot(data = sanitation_clean, aes(x = age_bracket, fill = age_bracket)) +
+ggplot(data = sanitation_clean, aes(x = age_bracket, fill = age_bracket)) +
   geom_bar(stat = "count", position = position_dodge()) +
   facet_grid(~willingness_to_invest) +
   ggtitle("Willingeness to invest in sanitation facilities by Age Bracket") +
   labs(x = "Age Bracket", y = "Count")
+```
+
+```{r echo=FALSE}
+#| label: fig-scatter-plot
+#| fig-cap: "scatter plot for presence of latrine, household size, willingess to invest against count"
 
 #plot2- scatter plot
-scatter_plot <- sanitation_clean |>
+sanitation_clean |>
 filter(!is.na(income)) |>
 ggplot(aes(household_size))+
   geom_point( stat = "count",aes(color = presence_of_latrine), alpha = 0.5)+
   facet_grid(willingness_to_invest ~ know_sanitation)
+```
+
+```{r}
+#| label: fig-boxplot
+#| fig-cap: "Household Size Distribution by eduction level"
 #plot- box plot
 # Create a box plot
-box_plot <- ggplot(sanitation_clean, aes(x = education, y = household_size)) +
+ggplot(sanitation_clean, aes(x = education, y = household_size)) +
   geom_boxplot(fill = "skyblue") +
   labs(title = "Household Size Distribution by eduction level", x = "education level", y = "household size") +
   theme_classic()
-
 ```
 
 #saving data file
@@ -266,7 +278,7 @@ write_csv(x = sanitation_clean, "/cloud/project/data/processed/sanitation_clean.
 
 # Results
 
-```{r}
+```{r, echo=FALSE}
 library(gtsummary)
 library(ggplot2)
 library(gt)
@@ -283,11 +295,11 @@ sanitation_clean <- read_csv(here::here("/cloud/project/data/processed/sanitatio
 
 ### demographic information of the respondents
 
-@tbl_demographic shows the distribution of respondents by gender, age bracket, religion, and household size. The majority of the respondents were male (49%), and the majority of the respondents' age bracket was 36-45 (30%). In terms of religion, the majority of the respondents reported being Christian (69%). The household size in Bomet County ranged from 2 to 8 persons, with a mean of approximately 4.77 and a standard deviation of 1.44. as shown in \@ref(fig:household_size)
+@tbl_demographic shows the distribution of respondents by gender, age bracket, religion, and household size. The majority of the respondents were male (49%), and the majority of the respondents' age bracket was 36-45 (30%). In terms of religion, the majority of the respondents reported being Christian (69%). The household size in Bomet County ranged from 2 to 8 persons, with a mean of approximately 4.77 and a standard deviation of 1.44. as shown in @fig-household_size
 
 ```{r}
 #| label: tbl_demographic
-#| tbl-cap:  Demographic informations of respondemnts 
+#| tbl-cap:  "Demographic informations of respondents"
  sanitation_clean |>
   select(gender, age_bracket, religion, education) |>
   tbl_summary(
@@ -300,7 +312,9 @@ sanitation_clean <- read_csv(here::here("/cloud/project/data/processed/sanitatio
 
 ### #data visualization of demographic characteristics of respondents
 
-```{r}
+```{r, echo=FALSE}
+#| label: fig-pie_chart
+#| fig-cap: "Distribution of respondents by gender"
 #pie chart for gender distributions 
 #Create a data frame with the gender distribution
 gender_data <- data.frame(
@@ -310,24 +324,29 @@ gender_data <- data.frame(
 ggplot(gender_data, aes(x = "", y = count, fill = gender)) +
   geom_bar(stat = "identity", width = 1) +
   coord_polar("y") +
-  labs(title = "Figure 1. Distribution of respondents by gender", fill = "gender") +
+  labs(title = "Distribution of respondents by gender", fill = "gender") +
   theme_minimal()
+```
+
+```{r, echo=FALSE}
+#| label: fig-education
+#| fig-cap: "Distribution of respondents bylevel of education"
 
 #bar graph for education with error bar.
 ggplot(sanitation_clean, aes(education, fill = education)) +
   geom_bar(stat = "count", fill = "skyblue") +
   labs(title = "Education Level Counts", x = "Education Level", y = "count") +
   theme_minimal()
+```
 
-#bar graph showing age_bracket of respondents against frequency "count"
-ggplot(sanitation_clean, aes(x = age_bracket, fill = age_bracket)) +
-  geom_bar(stat = "count") +
-  labs(title = " Table 1 : Frequency of Respondents by Age Bracket", x = "Age Bracket", y = "Count")
-#bar graph showing relogion of respondents against frequency "count"
+```{r, echo=FALSE}
+#| label: fig-religion
+#| fig-cap: "Distribution of respondents by religion"
+#bar graph showing religion of respondents against frequency "count"
 ggplot(sanitation_clean,
        aes(x = religion, fill = religion))+
   geom_bar(stat = "count")+
-  labs(title = " Table 2: Frequency of Respondents by religion", x = "religion", y = "Count")
+  labs(title = "Frequency of Respondents by religion", x = "religion", y = "Count")
 
 # Create a histogram for the household_size variable
 # Calculate the mean, standard deviation, and size of data
@@ -336,8 +355,17 @@ sd_hs <- sd(sanitation_clean$household_size)
 size_hs <- nrow(sanitation_clean)
 ```
 
+```{r echo=FALSE}
+#| label: fig-age_bracket
+#| fig-cap: "Frequency of Respondents by Age Bracket"
+#bar graph showing age_bracket of respondents against frequency "count"
+ggplot(sanitation_clean, aes(x = age_bracket, fill = age_bracket)) +
+  geom_bar(stat = "count") +
+  labs(title = "Frequency of Respondents by Age Bracket", x = "Age Bracket", y = "Count")
+```
+
 ```{r}
-#| label: household_size
+#| label: fig-household_size
 #| fig-cap: "household size distributions"
 
 #Create a histogram for the household_size variable
@@ -347,6 +375,8 @@ ggplot(sanitation_clean, aes(x = household_size)) +
   annotate("text", x = 1, y = 20, label = paste("Mean:", round(mean_hs, 2), "\nSD:", round(sd_hs, 2), "\nSize:", size_hs), color = "black", size = 4) +
   labs(title = "Household Size Distribution", x = "Household Size", y = "Count") +
   theme_minimal()
+
+
 ```
 
 ### #willingness to invest in sanitation
