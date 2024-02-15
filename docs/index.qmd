@@ -1,25 +1,33 @@
 ---
-title: "Willingness to invest in sanitation facilities. A case study of Bomet County, Kenya"
+title: "Willingness to invest in sanitation facilities. A case study of               Bomet County, Kenya"
 author: "Aaron Kipngeno"
 email: "aronkemboi01@gmail.com"
 ORCID : 0009 0007 0854 3201
 date: 13-02-2024
-execute:
-  warning: false
 format: 
   html:
     toc: true
+execute: 
+  echo: true
+  warning: false
 editor: visual
 bibliography: citations.bib
 ---
 
 ```{r}
 #| label: load-packages
+#| code-fold: true
 library(readr)
 library(tidyverse)
 library(knitr)
 library(ggplot2)
 library(usethis)
+library(gtsummary)
+library(ggplot2)
+library(gt)
+library(ggthemes)
+library(tidyverse)
+library(kableExtra)
 ```
 
 # Introduction
@@ -278,14 +286,7 @@ write_csv(x = sanitation_clean, "/cloud/project/data/processed/sanitation_clean.
 
 # Results
 
-```{r, echo=FALSE}
-library(gtsummary)
-library(ggplot2)
-library(gt)
-library(tidyverse)
-```
-
-Data import
+importing processed data.
 
 ```{r}
 #importing proccesed data
@@ -299,18 +300,19 @@ sanitation_clean <- read_csv(here::here("/cloud/project/data/processed/sanitatio
 
 ```{r}
 #| label: tbl_demographic
-#| tbl-cap:  "Demographic informations of respondents"
- sanitation_clean |>
-  select(gender, age_bracket, religion, education) |>
-  tbl_summary(
-    statistic = list(all_continuous() ~ "{mean} ± {sd}")
-  ) |>
-  as_gt() 
+#| tbl-cap: Demographic informations of respondents.
+ demographic <- sanitation_clean |>
+ select(gender, age_bracket, religion, education) |>
+   tbl_summary(
+    statistic = list(all_continuous() ~ "{mean} ± {sd}"))
+ 
+ 
+ kable(demographic, caption = "Demographic informations of respondents")
  
  summary(household_size)
 ```
 
-### #data visualization of demographic characteristics of respondents
+### data visualization of demographic characteristics of respondents
 
 ```{r, echo=FALSE}
 #| label: fig-pie_chart
@@ -367,6 +369,7 @@ ggplot(sanitation_clean, aes(x = age_bracket, fill = age_bracket)) +
 ```{r}
 #| label: fig-household_size
 #| fig-cap: "household size distributions"
+#|out-width: 50%
 
 #Create a histogram for the household_size variable
 ggplot(sanitation_clean, aes(x = household_size)) +
@@ -379,38 +382,41 @@ ggplot(sanitation_clean, aes(x = household_size)) +
 
 ```
 
-### #willingness to invest in sanitation
+### Willingness to invest in sanitation
 
 @tbl-willingness shows, majority of respondents 76% were willing to investigate. The study investigate the level of willingness, 29% were not willing, 20% very much willing and 48% were willing to invest, with significant associations at p-Value (0.001) as shown in \@tbl-level.
 
 ```{r}
 #|lable: tbl-willingness
 #|tbl-cap: proportion willing to invesrt in sanitaions
-sanitation_clean |> 
+tx <-sanitation_clean |> 
   tbl_summary(include = c(willingness_to_invest))
+
+kable(tx, caption = " proportion willing to invest in sanitation facilities")
+
 ```
 
 ```{r}
 #|lable: tbl-level
 #|tbl-cap: level of willingness to invest
 
-sanitation_clean |>
+tbl<- sanitation_clean |>
   tbl_cross(row = level_of_willingness,
             col = willingness_to_invest,
             percent = "cell") |> 
   add_p()
+kable(tbl, caption = "level of willingess to invest in sanitation facilities")
 ```
 
-### #social factors and willingness to invest in sanitation
+### Social factors and willingness to invest in sanitation
 
 Study investigated associations of gender,age, religion, knowledge on satiation, presence of latrine, benefit of use of toilet, sanitation laws and willingness to invest in sanitation facilities.
 
-#### #chi-Square test statistics
+#### chi-Square test statistics
 
 A Pearson's chi-squared test was conducted to examine the relationship between Social factors and willingness to invest in sanitation.
 
 ```{r}
-
 #genderand willinness to invest
 ##The results indicated a non-significant association between the two variables, χ²(df = 2, N = [99]) = 3.06, p = 0.216
 
@@ -442,11 +448,11 @@ s6 <-table(sanitation_clean$willingness_to_invest, sanitation_clean$sanitation_l
 chisq.test(s6)
 ```
 
-### #economic factors and willingness to invest in sanitation
+### Economic factors and willingness to invest in sanitation
 
 the study investigated influence of employement status, household income , sanitation organizations, knowldge on finacial institutions, and being member to saving and lending groups.
 
-#chi-square test statistics.
+chi-square test statistics.
 
 ```{r}
 #influence of employement status
