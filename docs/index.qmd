@@ -1,16 +1,22 @@
 ---
-title: "Willingness to invest in sanitation facilities. A case study of               Bomet County, Kenya"
-author: "Aaron Kipngeno"
-email: "aronkemboi01@gmail.com"
-ORCID : 0009 0007 0854 3201
-date: 13-02-2024
-format: 
-  html:
-    toc: true
+title: "Willingness to invest in sanitation facilities. A case study of Bomet County, Kenya"
+format:
+  html: default
+date: today
+author:
+  - name: Aaron Kipngeno
+    affiliations:
+      - name: OPenWASH Data Academy
+        department: Department of YYY
 execute: 
   echo: true
   warning: false
-editor: visual
+toc: true
+abstract: |
+  The text of your abstract. 200 or fewer words.
+keywords:
+  - 3 to 6 keywords
+  - that do not appear in the title
 bibliography: citations.bib
 ---
 
@@ -178,9 +184,7 @@ sanitation_information |>
 ```
 
 ```{r echo=FALSE}
-
 #2 What are the consequences of not using latrines?(mark all that apply)
-
 motivation <- sanitation_clean |> 
   select( disease_prevention:prestige) |> 
   pivot_longer(cols = disease_prevention:prestige,
@@ -191,10 +195,7 @@ motivation|>
   group_by(consequences) |> 
   count() |>
   mutate(percent = n / nrow(sanitation) * 100)
-
-
 #3 What characteristics would you like to see in your latrine of choice? (mark all that apply)
-
 latrine_charcteristics <- sanitation_clean |> 
   select( clean_floor_and_slab:lockable_door) |> 
   pivot_longer(cols = clean_floor_and_slab:lockable_door,
@@ -205,9 +206,7 @@ latrine_charcteristics |>
   group_by(quality_of_toilet) |> 
   count() |> 
   mutate(percent = n / nrow(sanitation) * 100)
-
 #4 What cultures do exist in your community that affect owning and use of latrines? (mark all that apply)
-
 culture <- sanitation_clean |>
   select( in_laws_do_not_share :people_living_with_chronic_illnesses_do_not_share) |> 
   pivot_longer(cols = in_laws_do_not_share :people_living_with_chronic_illnesses_do_not_share,
@@ -218,9 +217,7 @@ culture |>
   group_by(existing_cultures) |> 
   count() |> 
   mutate(percent = n / nrow(sanitation) * 100)
-
 #5 What hinders you/people from your community from accessing financial services?(mark all that apply)
-
 loan_factors <- sanitation_clean |>
   select(financial_knowledge:employment_status) |> 
   pivot_longer(cols = financial_knowledge:employment_status,
@@ -231,14 +228,6 @@ loan_factors |>
   group_by(`barrier_to _loan_services`) |> 
   count() |> 
   mutate(percent = n / nrow(sanitation) * 100)
-```
-
-```{r, echo=FALSE}
-#filter function
-type_of_latrine <- sanitation_clean |>
-  filter(!is.na(type_latrine_own)) |>
-  group_by(type_latrine_own) |>
-  count()
 ```
 
 ### Data visualization
@@ -296,20 +285,16 @@ sanitation_clean <- read_csv(here::here("/cloud/project/data/processed/sanitatio
 
 ### demographic information of the respondents
 
-@tbl_demographic shows the distribution of respondents by gender, age bracket, religion, and household size. The majority of the respondents were male (49%), and the majority of the respondents' age bracket was 36-45 (30%). In terms of religion, the majority of the respondents reported being Christian (69%). The household size in Bomet County ranged from 2 to 8 persons, with a mean of approximately 4.77 and a standard deviation of 1.44. as shown in @fig-household_size
+The @tbl-demographic, shows the distribution of respondents by gender, age bracket, religion, and household size. The majority of the respondents were male (49%), and the majority of the respondents' age bracket was 36-45 (30%). In terms of religion, the majority of the respondents reported being Christian (69%). The household size in Bomet County ranged from 2 to 8 persons, with a mean of approximately 4.77 and a standard deviation of 1.44. as shown in @fig-household_size.
 
 ```{r}
-#| label: tbl_demographic
+#| label: "tbl-demographic"
 #| tbl-cap: Demographic informations of respondents.
- demographic <- sanitation_clean |>
+demographic <- sanitation_clean |>
  select(gender, age_bracket, religion, education) |>
    tbl_summary(
     statistic = list(all_continuous() ~ "{mean} ± {sd}"))
- 
- 
  kable(demographic, caption = "Demographic informations of respondents")
- 
- summary(household_size)
 ```
 
 ### data visualization of demographic characteristics of respondents
@@ -369,7 +354,6 @@ ggplot(sanitation_clean, aes(x = age_bracket, fill = age_bracket)) +
 ```{r}
 #| label: fig-household_size
 #| fig-cap: "household size distributions"
-#|out-width: 50%
 
 #Create a histogram for the household_size variable
 ggplot(sanitation_clean, aes(x = household_size)) +
@@ -384,28 +368,29 @@ ggplot(sanitation_clean, aes(x = household_size)) +
 
 ### Willingness to invest in sanitation
 
-@tbl-willingness shows, majority of respondents 76% were willing to investigate. The study investigate the level of willingness, 29% were not willing, 20% very much willing and 48% were willing to invest, with significant associations at p-Value (0.001) as shown in \@tbl-level.
+As illustrated in @tbl-one, majority of respondents 76% were willing to invest in sanitation facilities. The study investigated the level of willingness, 29% were not willing, 20% very much willing and 48% were willing to invest, with significant associations at p-Value (0.001) as shown in @tbl-level.
 
 ```{r}
-#|lable: tbl-willingness
-#|tbl-cap: proportion willing to invesrt in sanitaions
+#| label: tbl-one
+#| tbl-cap: "proportion willing to invest in sanitation facilities"
 tx <-sanitation_clean |> 
   tbl_summary(include = c(willingness_to_invest))
 
-kable(tx, caption = " proportion willing to invest in sanitation facilities")
-
+kable(tx)
 ```
 
 ```{r}
-#|lable: tbl-level
-#|tbl-cap: level of willingness to invest
-
-tbl<- sanitation_clean |>
+#| label: tbl-level
+#| tbl-cap: "level of willingness"
+level_of_willingness <- sanitation_clean |>
   tbl_cross(row = level_of_willingness,
             col = willingness_to_invest,
             percent = "cell") |> 
   add_p()
-kable(tbl, caption = "level of willingess to invest in sanitation facilities")
+
+kable(level_of_willingness)
+
+
 ```
 
 ### Social factors and willingness to invest in sanitation
@@ -417,7 +402,7 @@ Study investigated associations of gender,age, religion, knowledge on satiation,
 A Pearson's chi-squared test was conducted to examine the relationship between Social factors and willingness to invest in sanitation.
 
 ```{r}
-#genderand willinness to invest
+#gender and willinness to invest
 ##The results indicated a non-significant association between the two variables, χ²(df = 2, N = [99]) = 3.06, p = 0.216
 
 s1 <- table(sanitation_clean$willingness_to_invest, sanitation_clean$gender)

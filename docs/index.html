@@ -7,7 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Aaron Kipngeno">
-<meta name="dcterms.date" content="2025-01-02">
+<meta name="dcterms.date" content="2024-02-17">
+<meta name="keywords" content="3 to 6 keywords, that do not appear in the title">
 
 <title>Willingness to invest in sanitation facilities. A case study of Bomet County, Kenya</title>
 <style>
@@ -138,26 +139,39 @@ div.csl-indent {
 </div>
 
 
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Aaron Kipngeno </p>
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            OPenWASH Data Academy
+          </p>
+      </div>
+    </div>
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Aaron Kipngeno </p>
-          </div>
-  </div>
-    
+      
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 2, 2025</p>
+      <p class="date">February 17, 2024</p>
     </div>
   </div>
   
     
   </div>
   
+<div>
+  <div class="abstract">
+    <div class="abstract-title">Abstract</div>
+    <p>The text of your abstract. 200 or fewer words.</p>
+  </div>
+</div>
 
 </header>
 
@@ -405,18 +419,17 @@ div.csl-indent {
 </div>
 <section id="demographic-information-of-the-respondents" class="level3">
 <h3 class="anchored" data-anchor-id="demographic-information-of-the-respondents">demographic information of the respondents</h3>
-<p><span class="citation" data-cites="tbl_demographic">(<a href="#ref-tbl_demographic" role="doc-biblioref"><strong>tbl_demographic?</strong></a>)</span> shows the distribution of respondents by gender, age bracket, religion, and household size. The majority of the respondents were male (49%), and the majority of the respondents’ age bracket was 36-45 (30%). In terms of religion, the majority of the respondents reported being Christian (69%). The household size in Bomet County ranged from 2 to 8 persons, with a mean of approximately 4.77 and a standard deviation of 1.44. as shown in <a href="#fig-household_size">Figure&nbsp;9</a></p>
+<p>The <a href="#tbl-demographic">Table&nbsp;1</a>, shows the distribution of respondents by gender, age bracket, religion, and household size. The majority of the respondents were male (49%), and the majority of the respondents’ age bracket was 36-45 (30%). In terms of religion, the majority of the respondents reported being Christian (69%). The household size in Bomet County ranged from 2 to 8 persons, with a mean of approximately 4.77 and a standard deviation of 1.44. as shown in <a href="#fig-household_size">Figure&nbsp;9</a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a> demographic <span class="ot">&lt;-</span> sanitation_clean <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>demographic <span class="ot">&lt;-</span> sanitation_clean <span class="sc">|&gt;</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">select</span>(gender, age_bracket, religion, education) <span class="sc">|&gt;</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">tbl_summary</span>(</span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">statistic =</span> <span class="fu">list</span>(<span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="st">"{mean} ± {sd}"</span>))</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">kable</span>(demographic, <span class="at">caption =</span> <span class="st">"Demographic informations of respondents"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">kable</span>(demographic, <span class="at">caption =</span> <span class="st">"Demographic informations of respondents"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
+<div id="tbl-demographic" class="anchored">
 <table class="table table-sm table-striped small">
-<caption>Demographic informations of respondents. </caption>
+<caption>Table&nbsp;1: Demographic informations of respondents.</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;"><strong>Characteristic</strong></th>
@@ -507,10 +520,6 @@ div.csl-indent {
 </tbody>
 </table>
 </div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">summary</span>(household_size)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  2.000   4.000   5.000   4.768   6.000   8.000 </code></pre>
 </div>
 </div>
 </section>
@@ -557,15 +566,13 @@ div.csl-indent {
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#|out-width: 50%</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Create a histogram for the household_size variable</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sanitation_clean, <span class="fu">aes</span>(<span class="at">x =</span> household_size)) <span class="sc">+</span></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">fill =</span> <span class="st">"skyblue"</span>, <span class="at">color =</span> <span class="st">"orange"</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> dnorm, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> mean_hs, <span class="at">sd =</span> sd_hs), <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="dv">1</span>)<span class="sc">+</span></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="dv">1</span>, <span class="at">y =</span> <span class="dv">20</span>, <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">"Mean:"</span>, <span class="fu">round</span>(mean_hs, <span class="dv">2</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">SD:"</span>, <span class="fu">round</span>(sd_hs, <span class="dv">2</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">Size:"</span>, size_hs), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Household Size Distribution"</span>, <span class="at">x =</span> <span class="st">"Household Size"</span>, <span class="at">y =</span> <span class="st">"Count"</span>) <span class="sc">+</span></span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Create a histogram for the household_size variable</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sanitation_clean, <span class="fu">aes</span>(<span class="at">x =</span> household_size)) <span class="sc">+</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">fill =</span> <span class="st">"skyblue"</span>, <span class="at">color =</span> <span class="st">"orange"</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> dnorm, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> mean_hs, <span class="at">sd =</span> sd_hs), <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="dv">1</span>)<span class="sc">+</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="dv">1</span>, <span class="at">y =</span> <span class="dv">20</span>, <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">"Mean:"</span>, <span class="fu">round</span>(mean_hs, <span class="dv">2</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">SD:"</span>, <span class="fu">round</span>(sd_hs, <span class="dv">2</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">Size:"</span>, size_hs), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Household Size Distribution"</span>, <span class="at">x =</span> <span class="st">"Household Size"</span>, <span class="at">y =</span> <span class="st">"Count"</span>) <span class="sc">+</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-household_size" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -578,17 +585,16 @@ div.csl-indent {
 </section>
 <section id="willingness-to-invest-in-sanitation" class="level3">
 <h3 class="anchored" data-anchor-id="willingness-to-invest-in-sanitation">Willingness to invest in sanitation</h3>
-<p><strong>?@tbl-willingness</strong> shows, majority of respondents 76% were willing to investigate. The study investigate the level of willingness, 29% were not willing, 20% very much willing and 48% were willing to invest, with significant associations at p-Value (0.001) as shown in @tbl-level.</p>
+<p>As illustrated in <a href="#tbl-one">Table&nbsp;2</a>, majority of respondents 76% were willing to invest in sanitation facilities. The study investigated the level of willingness, 29% were not willing, 20% very much willing and 48% were willing to invest, with significant associations at p-Value (0.001) as shown in <a href="#tbl-level">Table&nbsp;3</a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#|lable: tbl-willingness</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co">#|tbl-cap: proportion willing to invesrt in sanitaions</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>tx <span class="ot">&lt;-</span>sanitation_clean <span class="sc">|&gt;</span> </span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(<span class="at">include =</span> <span class="fu">c</span>(willingness_to_invest))</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(tx, <span class="at">caption =</span> <span class="st">" proportion willing to invest in sanitation facilities"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>tx <span class="ot">&lt;-</span>sanitation_clean <span class="sc">|&gt;</span> </span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(<span class="at">include =</span> <span class="fu">c</span>(willingness_to_invest))</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(tx)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
+<div id="tbl-one" class="anchored">
 <table class="table table-sm table-striped small">
-<caption>proportion willing to invest in sanitation facilities</caption>
+<caption>Table&nbsp;2: proportion willing to invest in sanitation facilities</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;"><strong>Characteristic</strong></th>
@@ -604,19 +610,19 @@ div.csl-indent {
 </table>
 </div>
 </div>
+</div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#|lable: tbl-level</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co">#|tbl-cap: level of willingness to invest</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>tbl<span class="ot">&lt;-</span> sanitation_clean <span class="sc">|&gt;</span></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_cross</span>(<span class="at">row =</span> level_of_willingness,</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">col =</span> willingness_to_invest,</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">percent =</span> <span class="st">"cell"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_p</span>()</span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(tbl, <span class="at">caption =</span> <span class="st">"level of willingess to invest in sanitation facilities"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>level_of_willingness <span class="ot">&lt;-</span> sanitation_clean <span class="sc">|&gt;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_cross</span>(<span class="at">row =</span> level_of_willingness,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">col =</span> willingness_to_invest,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">percent =</span> <span class="st">"cell"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_p</span>()</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(level_of_willingness)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
+<div id="tbl-level" class="anchored">
 <table class="table table-sm table-striped small">
-<caption>level of willingess to invest in sanitation facilities</caption>
+<caption>Table&nbsp;3: level of willingness</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;"></th>
@@ -673,6 +679,7 @@ div.csl-indent {
 </table>
 </div>
 </div>
+</div>
 </section>
 <section id="social-factors-and-willingness-to-invest-in-sanitation" class="level3">
 <h3 class="anchored" data-anchor-id="social-factors-and-willingness-to-invest-in-sanitation">Social factors and willingness to invest in sanitation</h3>
@@ -681,11 +688,11 @@ div.csl-indent {
 <h4 class="anchored" data-anchor-id="chi-square-test-statistics">chi-Square test statistics</h4>
 <p>A Pearson’s chi-squared test was conducted to examine the relationship between Social factors and willingness to invest in sanitation.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#genderand willinness to invest</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="do">##The results indicated a non-significant association between the two variables, χ²(df = 2, N = [99]) = 3.06, p = 0.216</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>s1 <span class="ot">&lt;-</span> <span class="fu">table</span>(sanitation_clean<span class="sc">$</span>willingness_to_invest, sanitation_clean<span class="sc">$</span>gender)</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(s1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#gender and willinness to invest</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="do">##The results indicated a non-significant association between the two variables, χ²(df = 2, N = [99]) = 3.06, p = 0.216</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>s1 <span class="ot">&lt;-</span> <span class="fu">table</span>(sanitation_clean<span class="sc">$</span>willingness_to_invest, sanitation_clean<span class="sc">$</span>gender)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(s1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's Chi-squared test
@@ -693,11 +700,11 @@ div.csl-indent {
 data:  s1
 X-squared = 3.0615, df = 2, p-value = 0.2164</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#willingness to invest and age bracket </span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co">#The test yielded a chi-squared statistic of 1.3313 with 4 degrees of freedom, and a p-value of 0.856. This suggests that there is no evidence to reject the null hypothesis, indicating that there is no association between the variables</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>s2 <span class="ot">&lt;-</span> <span class="fu">table</span>(sanitation_clean<span class="sc">$</span>willingness_to_invest, sanitation_clean<span class="sc">$</span>age_bracket)</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(s2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#willingness to invest and age bracket </span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co">#The test yielded a chi-squared statistic of 1.3313 with 4 degrees of freedom, and a p-value of 0.856. This suggests that there is no evidence to reject the null hypothesis, indicating that there is no association between the variables</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>s2 <span class="ot">&lt;-</span> <span class="fu">table</span>(sanitation_clean<span class="sc">$</span>willingness_to_invest, sanitation_clean<span class="sc">$</span>age_bracket)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(s2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's Chi-squared test
@@ -705,10 +712,10 @@ X-squared = 3.0615, df = 2, p-value = 0.2164</code></pre>
 data:  s2
 X-squared = 1.3313, df = 4, p-value = 0.856</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># willingess to invest &amp; religion</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co">#The analysis revealed no significant association, χ²(df = 2, N = 99) = 9.85, p = 0.0073</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>s3 <span class="ot">&lt;-</span> <span class="fu">table</span>(sanitation_clean<span class="sc">$</span>willingness_to_invest, sanitation_clean<span class="sc">$</span>religion)</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(s3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># willingess to invest &amp; religion</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co">#The analysis revealed no significant association, χ²(df = 2, N = 99) = 9.85, p = 0.0073</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>s3 <span class="ot">&lt;-</span> <span class="fu">table</span>(sanitation_clean<span class="sc">$</span>willingness_to_invest, sanitation_clean<span class="sc">$</span>religion)</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(s3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's Chi-squared test
@@ -716,10 +723,10 @@ X-squared = 1.3313, df = 4, p-value = 0.856</code></pre>
 data:  s3
 X-squared = 9.845, df = 2, p-value = 0.007281</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#willingness to invest and presence of latine</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co">#The analysis revealed a significant association, χ²(1, N = [99]) = 13.38, p = 0.0003</span></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>s4 <span class="ot">&lt;-</span> <span class="fu">table</span>(sanitation_clean<span class="sc">$</span>willingness_to_invest, sanitation_clean<span class="sc">$</span>presence_of_latrine)</span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(s4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#willingness to invest and presence of latine</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co">#The analysis revealed a significant association, χ²(1, N = [99]) = 13.38, p = 0.0003</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>s4 <span class="ot">&lt;-</span> <span class="fu">table</span>(sanitation_clean<span class="sc">$</span>willingness_to_invest, sanitation_clean<span class="sc">$</span>presence_of_latrine)</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(s4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's Chi-squared test with Yates' continuity correction
@@ -727,10 +734,10 @@ X-squared = 9.845, df = 2, p-value = 0.007281</code></pre>
 data:  s4
 X-squared = 13.375, df = 1, p-value = 0.000255</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># willingness to invest &amp; benefit to use llatrine</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="co">#The analysis revealed a significant association, χ²(2, N = [99) = 19.33, p = 6.34e-05</span></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>s5 <span class="ot">&lt;-</span> <span class="fu">table</span>(sanitation_clean<span class="sc">$</span>willingness_to_invest, sanitation_clean<span class="sc">$</span>benefit_of_use_latrine)</span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(s5)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># willingness to invest &amp; benefit to use llatrine</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co">#The analysis revealed a significant association, χ²(2, N = [99) = 19.33, p = 6.34e-05</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>s5 <span class="ot">&lt;-</span> <span class="fu">table</span>(sanitation_clean<span class="sc">$</span>willingness_to_invest, sanitation_clean<span class="sc">$</span>benefit_of_use_latrine)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(s5)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's Chi-squared test
@@ -738,9 +745,9 @@ X-squared = 13.375, df = 1, p-value = 0.000255</code></pre>
 data:  s5
 X-squared = 19.332, df = 2, p-value = 6.34e-05</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co">#willingess to invest in sanitation&amp; sanitation laws</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>s6 <span class="ot">&lt;-</span><span class="fu">table</span>(sanitation_clean<span class="sc">$</span>willingness_to_invest, sanitation_clean<span class="sc">$</span>sanitation_laws)</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(s6)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">#willingess to invest in sanitation&amp; sanitation laws</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>s6 <span class="ot">&lt;-</span><span class="fu">table</span>(sanitation_clean<span class="sc">$</span>willingness_to_invest, sanitation_clean<span class="sc">$</span>sanitation_laws)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(s6)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's Chi-squared test with Yates' continuity correction
@@ -756,10 +763,10 @@ X-squared = 6.7159, df = 1, p-value = 0.009556</code></pre>
 <p>the study investigated influence of employement status, household income , sanitation organizations, knowldge on finacial institutions, and being member to saving and lending groups.</p>
 <p>chi-square test statistics.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co">#influence of employement status</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="co">#no significant association p value = 0.02 &gt; 0.005</span></span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>e1 <span class="ot">&lt;-</span> <span class="fu">table</span>(sanitation_clean<span class="sc">$</span>willingness_to_invest, sanitation_clean<span class="sc">$</span>employement_status)</span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(e1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co">#influence of employement status</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="co">#no significant association p value = 0.02 &gt; 0.005</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>e1 <span class="ot">&lt;-</span> <span class="fu">table</span>(sanitation_clean<span class="sc">$</span>willingness_to_invest, sanitation_clean<span class="sc">$</span>employement_status)</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(e1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's Chi-squared test
@@ -767,10 +774,10 @@ X-squared = 6.7159, df = 1, p-value = 0.009556</code></pre>
 data:  e1
 X-squared = 7.7276, df = 2, p-value = 0.02099</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># influnce of household income</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="co">#The analysis revealed a significant association, χ²(4, N = [99]) = 16.22, p = 0.0027</span></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>e2 <span class="ot">&lt;-</span> <span class="fu">table</span>(sanitation_clean<span class="sc">$</span>willingness_to_invest, sanitation_clean<span class="sc">$</span>income)</span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(e2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># influnce of household income</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="co">#The analysis revealed a significant association, χ²(4, N = [99]) = 16.22, p = 0.0027</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>e2 <span class="ot">&lt;-</span> <span class="fu">table</span>(sanitation_clean<span class="sc">$</span>willingness_to_invest, sanitation_clean<span class="sc">$</span>income)</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(e2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's Chi-squared test
@@ -778,10 +785,10 @@ X-squared = 7.7276, df = 2, p-value = 0.02099</code></pre>
 data:  e2
 X-squared = 16.215, df = 4, p-value = 0.002744</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co">#presence sanitation organizations</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="co">#the analysis revealed a significant association, χ²(1, N = [99]) = 12.07, p = 0.0005</span></span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>e3 <span class="ot">&lt;-</span> <span class="fu">table</span>(sanitation_clean<span class="sc">$</span>willingness_to_invest, sanitation_clean<span class="sc">$</span>sanitation_organizations)</span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(e3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co">#presence sanitation organizations</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="co">#the analysis revealed a significant association, χ²(1, N = [99]) = 12.07, p = 0.0005</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>e3 <span class="ot">&lt;-</span> <span class="fu">table</span>(sanitation_clean<span class="sc">$</span>willingness_to_invest, sanitation_clean<span class="sc">$</span>sanitation_organizations)</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(e3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's Chi-squared test with Yates' continuity correction
@@ -789,10 +796,10 @@ X-squared = 16.215, df = 4, p-value = 0.002744</code></pre>
 data:  e3
 X-squared = 12.066, df = 1, p-value = 0.0005135</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># influence of being member of saving and lending groups</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="co"># signifiacnt association at χ²(1, N= 99)= 10.692, p = 001. </span></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>e4<span class="ot">&lt;-</span> <span class="fu">table</span>(sanitation_clean<span class="sc">$</span>willingness_to_invest, sanitation_clean<span class="sc">$</span>member_to_savings_and_lendings_groups)</span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(e4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># influence of being member of saving and lending groups</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="co"># signifiacnt association at χ²(1, N= 99)= 10.692, p = 001. </span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>e4<span class="ot">&lt;-</span> <span class="fu">table</span>(sanitation_clean<span class="sc">$</span>willingness_to_invest, sanitation_clean<span class="sc">$</span>member_to_savings_and_lendings_groups)</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(e4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's Chi-squared test with Yates' continuity correction
