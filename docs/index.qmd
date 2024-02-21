@@ -13,10 +13,12 @@ execute:
   warning: false
 toc: true
 abstract: |
-  The text of your abstract. 200 or fewer words.
+  Acesss to improved sanitation is fundememtal need and  human right. However, in developing countries including Kenya, is still a challenge. this study investigated factor influncing households'willingness to invest in saniation, with majority 76% willing to invest.social factors investigated had no significant associations with the willingness to invest in sanitation, except for the benefit of use and the presence of a toilet, which showed significant associations at a p-value of less than .05. Economic factors such household income, the presence of organizations that promote sanitation, and being a member of saving and lending groups was to have significance association, at p value (<.05)
 keywords:
-  - 3 to 6 keywords
-  - that do not appear in the title
+  - sdgs
+  - willingness to invest
+  - social fcators
+  - economic factors
 bibliography: citations.bib
 ---
 
@@ -46,11 +48,11 @@ The traditional community-led total sanitation (CLTS) approach, as used in Bomet
 
 ### Objective of the study
 
-#1. To assess the proportion of willingness to invest in sanitation facilities by households in Bomet Sub-county.
+1\. To assess the proportion of willingness to invest in sanitation facilities by households in Bomet Sub-county.
 
-#2. To determine the demographic and social-cultural factors that influences the willingness to invest in sanitation facilities by households in Bomet Sub-county.
+2\. To determine the demographic and social-cultural factors that influences the willingness to invest in sanitation facilities by households in Bomet Sub-county.
 
-#3. To determine the economic and financial factors that influences the willingness to invest in sanitation facilities by household sin Bomet Sub-county.
+3\. To determine the economic and financial factors that influences the willingness to invest in sanitation facilities by household sin Bomet Sub-county.
 
 # Methodology
 
