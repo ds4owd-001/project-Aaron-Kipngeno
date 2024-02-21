@@ -2,12 +2,11 @@
 title: "Willingness to invest in sanitation facilities. A case study of Bomet County, Kenya"
 format:
   html: default
-date: today
+date: 02-13-2024
 author:
   - name: Aaron Kipngeno
     affiliations:
       - name: OPenWASH Data Academy
-        department: Department of YYY
 execute: 
   echo: true
   warning: false
@@ -19,6 +18,9 @@ keywords:
   - willingness to invest
   - social fcators
   - economic factors
+citation:
+       url: https://github.com/ds4owd-001/project-Aaron-Kipngeno.git
+editor: visual
 bibliography: citations.bib
 ---
 
